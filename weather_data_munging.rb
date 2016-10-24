@@ -10,6 +10,12 @@ class WeatherDataProcessor
   end
 end
 
+class WeatherDataMunger
+  def munge data
+    []
+  end
+end
+
 class DayWeatherData
   attr_reader :day, :minTemp, :maxTemp
   def initialize(day, minTemp, maxTemp)

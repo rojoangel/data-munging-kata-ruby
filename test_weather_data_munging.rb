@@ -21,3 +21,11 @@ class TestWeatherDataProcessor < Test::Unit::TestCase
     assert_equal(2, smallestTemperatureSpreadDay)
   end
 end
+
+class TestWeatherDataMunger < Test::Unit::TestCase
+  def test_ignores_header
+    rawData = '  Dy MxT   MnT   AvT   HDDay  AvDP 1HrP TPcpn WxType PDir AvSp Dir MxS SkyC MxR MnR AvSLP'
+    mungedData = WeatherDataMunger.new.munge(rawData)
+    assert_equal([], mungedData)
+  end
+end
