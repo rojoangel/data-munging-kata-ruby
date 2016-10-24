@@ -13,4 +13,11 @@ class TestWeatherMunger < Test::Unit::TestCase
     smallestTemperatureSpreadDay = WeatherDataMunger.new.munge(weatherData)
     assert_equal(1, smallestTemperatureSpreadDay)
   end
+  def test_returns_smallest_temp_spread_day_from_multiple_day_weather_data
+    weatherData = [DayWeatherData.new(1, 20, 30),
+                   DayWeatherData.new(2, 17, 21),
+                   DayWeatherData.new(3, 19, 31)]
+    smallestTemperatureSpreadDay = WeatherDataMunger.new.munge(weatherData)
+    assert_equal(2, smallestTemperatureSpreadDay)
+  end
 end

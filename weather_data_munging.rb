@@ -5,7 +5,7 @@ class WeatherDataMunger
     if data.empty?
       raise Exceptions::EmptyData
     else
-      1
+      data.inject{|smallestTempSpreadDay, dayWeatherData| if dayWeatherData.tempStread < smallestTempSpreadDay.tempStread then dayWeatherData else smallestTempSpreadDay end}.day
     end
   end
 end
@@ -16,5 +16,8 @@ class DayWeatherData
     @day = day
     @minTemp = minTemp
     @maxTemp = maxTemp
+  end
+  def tempStread
+    @maxTemp - @minTemp
   end
 end
