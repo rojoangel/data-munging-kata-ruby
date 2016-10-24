@@ -5,7 +5,7 @@ class WeatherDataProcessor
     if data.empty?
       raise Exceptions::EmptyData
     else
-      data.inject{|smallestTempSpreadDay, dayWeatherData| if dayWeatherData.tempStread < smallestTempSpreadDay.tempStread then dayWeatherData else smallestTempSpreadDay end}.day
+      data.inject{|smallestTempSpreadDay, dayWeatherData| if dayWeatherData.tempSpread < smallestTempSpreadDay.tempSpread then dayWeatherData else smallestTempSpreadDay end}.day
     end
   end
 end
@@ -29,20 +29,20 @@ class DayWeatherData
   include Comparable
 
   attr_reader :day, :minTemp, :maxTemp
-  
+
   def initialize(day, minTemp, maxTemp)
     @day = day
     @minTemp = minTemp
     @maxTemp = maxTemp
   end
-  def tempStread
+  def tempSpread
     @maxTemp - @minTemp
   end
 
   def <=>(other)
-    if self.tempStread < other.tempStread
+    if self.tempSpread < other.tempSpread
       -1
-    elsif self.tempStread > other.tempStread
+    elsif self.tempSpread > other.tempSpread
       1
     else
       0
