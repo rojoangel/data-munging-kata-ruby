@@ -1,7 +1,7 @@
 require "./exceptions.rb"
 
-class WeatherDataMunger
-  def munge data
+class WeatherDataProcessor
+  def process data
     if data.empty?
       raise Exceptions::EmptyData
     else
