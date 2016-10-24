@@ -42,9 +42,17 @@ class DayWeatherData
   end
 
   def <=>(other)
-    if self.tempSpread < other.tempSpread
+    if self.day < other.day
       -1
-    elsif self.tempSpread > other.tempSpread
+    elsif self.day > other.day
+      1
+    elsif self.minTemp < other.minTemp
+      -1
+    elsif self.minTemp > other.minTemp
+      1
+    elsif self.maxTemp < other.maxTemp
+      -1
+    elsif self.maxTemp > other.maxTemp
       1
     else
       0
