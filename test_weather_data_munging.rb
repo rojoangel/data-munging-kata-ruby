@@ -52,4 +52,9 @@ class TestWeatherDataMunger < Test::Unit::TestCase
     mungedData = WeatherDataMunger.new.munge(rawData)
     assert_equal([DayWeatherData.new(26, 64, 97)], mungedData)
   end
+  def test_ignores_month_summary_line
+    rawData = "  mo  82.9  60.5  71.7    16  58.8       0.00              6.9          5.3"
+    mungedData = WeatherDataMunger.new.munge(rawData)
+    assert_equal([], mungedData)
+  end
 end
