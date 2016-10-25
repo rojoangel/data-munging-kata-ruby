@@ -1,6 +1,6 @@
 require "./exceptions.rb"
 
-class WeatherDataProcessor
+class MinimumDailyTemperatureSpreadCalculator
   def process data
     if data.empty?
       raise Exceptions::EmptyData
