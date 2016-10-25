@@ -34,11 +34,16 @@ class TestWeatherDataMunger < Test::Unit::TestCase
     mungedData = WeatherDataMunger.new.munge(rawData)
     assert_equal([], mungedData)
   end
-  def test_parses_line_containing_weather_data
+  def test_parses_regular_line_containing_weather_data
     rawData = "  Dy MxT   MnT   AvT   HDDay  AvDP 1HrP TPcpn WxType PDir AvSp Dir MxS SkyC MxR MnR AvSLP\n" +
               "\n" +
               "   1  88    59    74          53.8       0.00 F       280  9.6 270  17  1.6  93 23 1004.5\n"
     mungedData = WeatherDataMunger.new.munge(rawData)
     assert_equal([DayWeatherData.new(1, 59, 88)], mungedData)
+  end
+  def test_parses_line_containing_weather_data_for_month_minimum #MnT marked with an '*'
+    rawData = "   9  86    32*   59       6  61.5       0.00         240  7.6 220  12  6.0  78 46 1018.6"
+    mungedData = WeatherDataMunger.new.munge(rawData)
+    assert_equal([DayWeatherData.new(9, 32, 86)], mungedData)
   end
 end
