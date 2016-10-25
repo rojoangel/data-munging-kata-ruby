@@ -1,5 +1,20 @@
 require "./exceptions.rb"
 
+class WeatherDataProcessor
+  def initialize(fileReader,
+                 dataMunger,
+                 minimumDailyTemperatureSpreadCalculator)
+    @fileReader = fileReader
+    @dataMunger = dataMunger
+    @minimumDailyTemperatureSpreadCalculator = minimumDailyTemperatureSpreadCalculator
+  end
+  def calculateDayWithMinimumTemperatureSpread
+    contents = @fileReader.read
+    data = @dataMunger.munge(contents)
+    @minimumDailyTemperatureSpreadCalculator.process(data)
+  end
+end
+
 class MinimumDailyTemperatureSpreadCalculator
   def process data
     if data.empty?
