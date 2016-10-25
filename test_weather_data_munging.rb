@@ -41,9 +41,15 @@ class TestWeatherDataMunger < Test::Unit::TestCase
     mungedData = WeatherDataMunger.new.munge(rawData)
     assert_equal([DayWeatherData.new(1, 59, 88)], mungedData)
   end
+  # next two tests work in ruby because the way strip_to_i works
   def test_parses_line_containing_weather_data_for_month_minimum #MnT marked with an '*'
     rawData = "   9  86    32*   59       6  61.5       0.00         240  7.6 220  12  6.0  78 46 1018.6"
     mungedData = WeatherDataMunger.new.munge(rawData)
     assert_equal([DayWeatherData.new(9, 32, 86)], mungedData)
+  end
+  def test_parses_line_containing_weather_data_for_month_maximum #MnT marked with an '*'
+    rawData = "  26  97*   64    81          70.4       0.00 H       050  5.1 200  12  4.0 107 45 1014.9"
+    mungedData = WeatherDataMunger.new.munge(rawData)
+    assert_equal([DayWeatherData.new(26, 64, 97)], mungedData)
   end
 end
