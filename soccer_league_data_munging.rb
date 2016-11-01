@@ -10,6 +10,12 @@ class SmallestGoalDifferenceTeamCalculator
   end
 end
 
+class SoccerLeagueDataMunger
+  def munge data
+    []
+  end
+end
+
 class TeamGoalData
   attr_reader :team, :against, :for
 

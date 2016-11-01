@@ -21,3 +21,12 @@ class TestSmallestGoalDifferenceTeamCalculator < Test::Unit::TestCase
     assert_equal("Liverpool", smallestGoalDifferenceTeam)
   end
 end
+
+class TestSoccerLeagueDataMunger < Test::Unit::TestCase
+  def test_ignores_lines_not_containing_team_goal_data
+    rawData = "       Team            P     W    L   D    F      A     Pts\n"+
+              "   -------------------------------------------------------\n"
+    mungedData = SoccerLeagueDataMunger.new.munge(rawData)
+    assert_equal([], mungedData)
+  end
+end
