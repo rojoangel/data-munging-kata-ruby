@@ -38,6 +38,6 @@ class TestSoccerLeagueDataProcessor  < Test::Unit::TestCase
                                                               dataMunger,
                                                               smallestGoalDifferenceTeamCalculator)
 
-    assert_equal("Blackburn", weatherDataProcessor.calculateDayWithMinimumTemperatureSpread())
+    assert_equal("Aston_Villa", soccerLeagueDataProcessor.calculateTeamWithSmallestGoalDifference())
   end
 end

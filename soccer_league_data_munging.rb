@@ -1,5 +1,20 @@
 require "./exceptions.rb"
 
+class SoccerLeagueDataProcessor
+  def initialize(fileReader,
+                 dataMunger,
+                 smallestGoalDifferenceTeamCalculator)
+    @fileReader = fileReader
+    @dataMunger = dataMunger
+    @smallestGoalDifferenceTeamCalculator = smallestGoalDifferenceTeamCalculator
+  end
+  def calculateTeamWithSmallestGoalDifference
+    contents = @fileReader.read
+    data = @dataMunger.munge(contents)
+    @smallestGoalDifferenceTeamCalculator.process(data)
+  end
+end
+
 class SmallestGoalDifferenceTeamCalculator
   def process data
     if data.empty?
@@ -36,7 +51,7 @@ class TeamGoalData
     @goals_for = goals_for
   end
   def goalDifference
-    @goals_for - @goals_against
+    (@goals_for - @goals_against).abs
   end
 
   def <=>(other)
