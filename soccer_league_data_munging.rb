@@ -5,7 +5,7 @@ class SmallestGoalDifferenceTeamCalculator
     if data.empty?
       raise Exceptions::EmptyData
     else
-      data[0].team
+      data.inject{|smallestGoalDiffenceTeam, teamGoalData| if teamGoalData.goalDifference < smallestGoalDiffenceTeam.goalDifference then teamGoalData else smallestGoalDiffenceTeam end}.team
     end
   end
 end
@@ -17,5 +17,8 @@ class TeamGoalData
     @team = team
     @goals_against = goals_against
     @goals_for = goals_for
+  end
+  def goalDifference
+    @goals_for - @goals_against
   end
 end
