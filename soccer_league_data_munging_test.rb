@@ -29,4 +29,9 @@ class TestSoccerLeagueDataMunger < Test::Unit::TestCase
     mungedData = SoccerLeagueDataMunger.new.munge(rawData)
     assert_equal([], mungedData)
   end
+  def test_parses_line_containing_team_goal_data
+    rawData = "    1. Arsenal         38    26   9   3    79  -  36    87\n"
+    mungedData = SoccerLeagueDataMunger.new.munge(rawData)
+    assert_equal([TeamGoalData.new("Arsenal", 36, 79)], mungedData)
+  end
 end
