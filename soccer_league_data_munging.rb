@@ -40,36 +40,3 @@ class SoccerLeagueDataMunger
     mungedData
   end
 end
-
-class TeamGoalData
-  include Comparable
-
-  attr_reader :team, :goals_against, :goals_for
-
-  def initialize(team, goals_against, goals_for)
-    @team = team
-    @goals_against = goals_against
-    @goals_for = goals_for
-  end
-  def goalDifference
-    (@goals_for - @goals_against).abs
-  end
-
-  def <=>(other)
-    if self.goals_against < other.goals_against
-      -1
-    elsif self.goals_against > other.goals_against
-      1
-    elsif self.goals_for < other.goals_for
-      -1
-    elsif self.goals_for > other.goals_for
-      1
-    elsif self.team < other.team
-      -1
-    elsif self.team > other.team
-      1
-    else
-      0
-    end
-  end
-end

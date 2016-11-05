@@ -1,23 +1,23 @@
 require "./weather_data_munging.rb"
 require "test/unit"
 
-class TestMinimumDailyTemperatureSpreadCalculator < Test::Unit::TestCase
+class TestSmallestDifferenceCalculatorWithDayTemperatureData < Test::Unit::TestCase
   def test_returns_error_for_empty_data
     assert_raise Exceptions::EmptyData do
       emptyData = []
-      MinimumDailyTemperatureSpreadCalculator.new.process(emptyData)
+      SmallestDifferenceCalculator.new.process(emptyData)
     end
   end
   def test_returns_day_from_single_day_weather_data
     weatherData = [MungedData.new(1, 20, 30)]
-    smallestTemperatureSpreadDay = MinimumDailyTemperatureSpreadCalculator.new.process(weatherData)
+    smallestTemperatureSpreadDay = SmallestDifferenceCalculator.new.process(weatherData)
     assert_equal(1, smallestTemperatureSpreadDay)
   end
   def test_returns_smallest_temp_spread_day_from_multiple_day_weather_data
     weatherData = [MungedData.new(1, 20, 30),
                    MungedData.new(2, 17, 21),
                    MungedData.new(3, 19, 31)]
-    smallestTemperatureSpreadDay = MinimumDailyTemperatureSpreadCalculator.new.process(weatherData)
+    smallestTemperatureSpreadDay = SmallestDifferenceCalculator.new.process(weatherData)
     assert_equal(2, smallestTemperatureSpreadDay)
   end
 end

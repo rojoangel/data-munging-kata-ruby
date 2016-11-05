@@ -42,36 +42,3 @@ class WeatherDataMunger
     mungedData
   end
 end
-
-class DayWeatherData
-  include Comparable
-
-  attr_reader :day, :minTemp, :maxTemp
-
-  def initialize(day, minTemp, maxTemp)
-    @day = day
-    @minTemp = minTemp
-    @maxTemp = maxTemp
-  end
-  def tempSpread
-    (@maxTemp - @minTemp).abs
-  end
-
-  def <=>(other)
-    if self.day < other.day
-      -1
-    elsif self.day > other.day
-      1
-    elsif self.minTemp < other.minTemp
-      -1
-    elsif self.minTemp > other.minTemp
-      1
-    elsif self.maxTemp < other.maxTemp
-      -1
-    elsif self.maxTemp > other.maxTemp
-      1
-    else
-      0
-    end
-  end
-end
