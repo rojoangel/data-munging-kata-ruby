@@ -53,7 +53,7 @@ class DayWeatherData
     @maxTemp = maxTemp
   end
   def tempSpread
-    @maxTemp - @minTemp
+    (@maxTemp - @minTemp).abs
   end
 
   def <=>(other)
