@@ -9,14 +9,14 @@ class TestMinimumDailyTemperatureSpreadCalculator < Test::Unit::TestCase
     end
   end
   def test_returns_day_from_single_day_weather_data
-    weatherData = [DayWeatherData.new(1, 20, 30)]
+    weatherData = [MungedData.new(1, 20, 30)]
     smallestTemperatureSpreadDay = MinimumDailyTemperatureSpreadCalculator.new.process(weatherData)
     assert_equal(1, smallestTemperatureSpreadDay)
   end
   def test_returns_smallest_temp_spread_day_from_multiple_day_weather_data
-    weatherData = [DayWeatherData.new(1, 20, 30),
-                   DayWeatherData.new(2, 17, 21),
-                   DayWeatherData.new(3, 19, 31)]
+    weatherData = [MungedData.new(1, 20, 30),
+                   MungedData.new(2, 17, 21),
+                   MungedData.new(3, 19, 31)]
     smallestTemperatureSpreadDay = MinimumDailyTemperatureSpreadCalculator.new.process(weatherData)
     assert_equal(2, smallestTemperatureSpreadDay)
   end
@@ -37,6 +37,6 @@ class TestWeatherDataMunger < Test::Unit::TestCase
   def test_parses_line_containing_weather_data
     rawData = "   1  88*    59*    74          53.8       0.00 F       280  9.6 270  17  1.6  93 23 1004.5\n"
     mungedData = WeatherDataMunger.new.munge(rawData)
-    assert_equal([DayWeatherData.new(1, 59, 88)], mungedData)
+    assert_equal([MungedData.new(1, 59, 88)], mungedData)
   end
 end

@@ -1,4 +1,5 @@
 require "./exceptions.rb"
+require "./data_munging.rb"
 
 class WeatherDataProcessor
   def initialize(fileReader,
@@ -20,7 +21,7 @@ class MinimumDailyTemperatureSpreadCalculator
     if data.empty?
       raise Exceptions::EmptyData
     else
-      data.inject{|smallestTempSpreadDay, dayWeatherData| if dayWeatherData.tempSpread < smallestTempSpreadDay.tempSpread then dayWeatherData else smallestTempSpreadDay end}.day
+      data.inject{|smallestDifferenceData, data| if data.difference < smallestDifferenceData.difference then data else smallestDifferenceData end}.label
     end
   end
 end
@@ -34,7 +35,7 @@ class WeatherDataMunger
         unless day == 0
           maxTemp = line[5..8].strip.to_i
           minTemp = line[9..14].strip.to_i
-          mungedData << DayWeatherData.new(day,minTemp,maxTemp)
+          mungedData << MungedData.new(day,minTemp,maxTemp)
         end
       end
     end

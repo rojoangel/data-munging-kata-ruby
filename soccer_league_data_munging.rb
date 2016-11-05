@@ -1,4 +1,5 @@
 require "./exceptions.rb"
+require "./data_munging.rb"
 
 class SoccerLeagueDataProcessor
   def initialize(fileReader,
@@ -20,7 +21,7 @@ class SmallestGoalDifferenceTeamCalculator
     if data.empty?
       raise Exceptions::EmptyData
     else
-      data.inject{|smallestGoalDiffenceTeam, teamGoalData| if teamGoalData.goalDifference < smallestGoalDiffenceTeam.goalDifference then teamGoalData else smallestGoalDiffenceTeam end}.team
+      data.inject{|smallestDifferenceData, data| if data.difference < smallestDifferenceData.difference then data else smallestDifferenceData end}.label
     end
   end
 end
@@ -33,7 +34,7 @@ class SoccerLeagueDataMunger
       unless goals_for == 0
         goals_against = line[48..51].strip.to_i
         team = line[7..22].strip
-        mungedData << TeamGoalData.new(team,goals_against,goals_for)
+        mungedData << MungedData.new(team,goals_against,goals_for)
       end
     end
     mungedData
