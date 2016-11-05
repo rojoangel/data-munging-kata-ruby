@@ -20,11 +20,13 @@ class SoccerLeagueDataMunger
   def munge data
     mungedData = []
     data.each_line do |line|
-      goals_for = line[39..44].strip.to_i
-      unless goals_for == 0
-        goals_against = line[48..51].strip.to_i
-        team = line[7..22].strip
-        mungedData << MungedData.new(team,goals_against,goals_for)
+      unless line.empty?
+        goals_for = line[39..44].strip.to_i
+        unless goals_for == 0
+          goals_against = line[48..51].strip.to_i
+          team = line[7..22].strip
+          mungedData << MungedData.new(team,goals_against,goals_for)
+        end
       end
     end
     mungedData
