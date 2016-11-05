@@ -16,16 +16,6 @@ class WeatherDataProcessor
   end
 end
 
-class MinimumDailyTemperatureSpreadCalculator
-  def process data
-    if data.empty?
-      raise Exceptions::EmptyData
-    else
-      data.inject{|smallestDifferenceData, data| if data.difference < smallestDifferenceData.difference then data else smallestDifferenceData end}.label
-    end
-  end
-end
-
 class WeatherDataMunger
   def munge data
     mungedData = []

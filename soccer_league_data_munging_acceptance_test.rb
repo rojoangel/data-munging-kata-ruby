@@ -32,7 +32,7 @@ class TestSoccerLeagueDataProcessor  < Test::Unit::TestCase
   def test_calculates_team_with_smallest_goal_difference
     fileReader = FileReaderStub.new
     dataMunger = SoccerLeagueDataMunger.new
-    smallestGoalDifferenceTeamCalculator = SmallestGoalDifferenceTeamCalculator.new
+    smallestGoalDifferenceTeamCalculator = SmallestDifferenceCalculator.new
 
     soccerLeagueDataProcessor = SoccerLeagueDataProcessor.new(fileReader,
                                                               dataMunger,

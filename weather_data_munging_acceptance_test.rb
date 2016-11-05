@@ -43,7 +43,7 @@ class TestWeatherDataProcessor  < Test::Unit::TestCase
   def test_calculates_day_with_minimum_temperature_spread
     fileReader = FileReaderStub.new
     dataMunger = WeatherDataMunger.new
-    minimumDailyTemperatureSpreadCalculator = MinimumDailyTemperatureSpreadCalculator.new
+    minimumDailyTemperatureSpreadCalculator = SmallestDifferenceCalculator.new
 
     weatherDataProcessor = WeatherDataProcessor.new(fileReader,
                                                     dataMunger,

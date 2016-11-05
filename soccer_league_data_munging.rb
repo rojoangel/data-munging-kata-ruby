@@ -16,16 +16,6 @@ class SoccerLeagueDataProcessor
   end
 end
 
-class SmallestGoalDifferenceTeamCalculator
-  def process data
-    if data.empty?
-      raise Exceptions::EmptyData
-    else
-      data.inject{|smallestDifferenceData, data| if data.difference < smallestDifferenceData.difference then data else smallestDifferenceData end}.label
-    end
-  end
-end
-
 class SoccerLeagueDataMunger
   def munge data
     mungedData = []
